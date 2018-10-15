@@ -19,6 +19,20 @@ Class.forName("com.mysql.cj.jdbc.Driver");
 Connection con;
 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/agendatelefonica?useTimezone=true&serverTimezone=UTC", "root", "");
             System.out.println("Conexion realiza con exito!");
+            
+            // devolver informacion de la bd
+            Statement estado = con.createStatement();
+            ResultSet resultado = estado.executeQuery("Select * from agenda ORDER by id");
+            
+            System.out.println("ID \tNombre \t  \tTelefono \t");
+            while (resultado.next()) { 
+                System.out.println(resultado.getString("id")+"\t"+resultado.getString("nombre")+"\t\t"+resultado.getString("telefono"));
+                
+            }
+            
+            /** fin obtencion informacion de la informacion a la bd */
+            
+            
         } catch (SQLException ex) {
             System.out.println("error mysql");
         }
